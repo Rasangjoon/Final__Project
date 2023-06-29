@@ -47,12 +47,14 @@ st.markdown('<h1 style="font-size:30px;">- 💹주가, 기사, 재무제표 분�
 st.sidebar.success("Select a page above.")
 
 def main():
-    tab11, tab12 = st.tabs(["개요","주가, 재무제표, 뉴스 데이터"])
+    tab11, tab12 = st.tabs(["개요","종목 데이터"])
     with tab11:
+        st.subheader(' - 홈페이지의 간단한 구성을 보여주는 페이지입니다.')
         st.markdown( 
         """
         # 1. 🌱Homepage \n     
-        ## 1.1 주가, 재무제표, 뉴스 데이터 \n
+        #### 1.1 개요 \n
+        #### 1.2 종목 데이터
             (1) 데이터 \n
                 - 최근종가 \n
                     - 최근 종가(Close)값과 모맨텀 점수. \n
@@ -104,6 +106,7 @@ def main():
         df = load_data('all.csv')
         df1 = load_data('api.csv')
         df2 = load_data("news.csv")
+        df3 = load_data("stock_data.csv")
         
         grouped_data = df1.groupby("기업명")
         tab_list = ["삼성전자", "현대차", "포스코", "셀트리온", "삼성생명"]
@@ -179,28 +182,27 @@ def main():
                     momentum_scores = (close_prices / close_prices.shift(1) - 1) * 100
                     
                     
-                
-
-                    # 최근 30일 모멘텀 스코어 표시
-                    st.subheader( " - Momentum Score (최근 30일)")
-                    st.write()
-                    st.write(pd.DataFrame({'Date': dates, 'Momentum Score': momentum_scores}))
                     
+                    # 날짜(date)와 점수(score) 컬럼 추출
+                    df_subset = df3[['Date', 'company_name', 'Score']]
+
+                    # company_name과 이름이 일치하는 데이터만 추출
+                    company_name = "삼성전자"  # 원하는 회사 이름으로 변경
+                    df_subset = df_subset[df_subset['company_name'] == company_name]
+
+                    # 날짜(date) 컬럼을 날짜 형식으로 변환
+                    df_subset['Date'] = pd.to_datetime(df_subset['Date'])
+
+                    # 날짜(date) 컬럼을 기준으로 최신 순으로 정렬
+                    df_subset = df_subset.sort_values(by='Date', ascending=False)
+
+                    # Streamlit 앱 구성
+                    #st.subheader(' {}의 금일 종가에 비해 60일 이후 종가 평균이 클 확률'.format(company_name))
+                    st.subheader('-Momentum Score(최근 60일)')
                     
-                    n = 5  # n일 이동평균
-                    m = 10  # m일 이동평균
+                    st.markdown('#### - {}의 금일 종가에 비해 60일 이후 종가 평균이 클 확률'.format(company_name))
 
-                    # n일 이동평균과 m일 이동평균 비교
-                    ma_5 = df_samsung['MA_5']
-                    ma_10 = df_samsung['MA_10']
-                    comparison = ma_5 > ma_10
-
-                    # m이 n보다 클 확률 계산
-                    probability = sum(comparison) / len(comparison)
-
-                    # 결과 출력
-                    st.subheader(" - 이동평균 크기 비교")
-                    st.write(f"m이 n보다 클 확률: {probability:.2%}")
+                    st.dataframe(df_subset)
 
 
 
@@ -349,6 +351,27 @@ def main():
 
                 # 전날 대비 등락율 텍스트 표시
                 st.markdown(f"<font color='{change_color}'>Change: {latest_change_pct:.2f}%</font>", unsafe_allow_html=True)
+                
+                # 날짜(date)와 점수(score) 컬럼 추출
+                df_subset = df3[['Date', 'company_name', 'Score']]
+
+                # company_name과 이름이 일치하는 데이터만 추출
+                company_name = "현대차"  # 원하는 회사 이름으로 변경
+                df_subset = df_subset[df_subset['company_name'] == company_name]
+
+                # 날짜(date) 컬럼을 날짜 형식으로 변환
+                df_subset['Date'] = pd.to_datetime(df_subset['Date'])
+
+                # 날짜(date) 컬럼을 기준으로 최신 순으로 정렬
+                df_subset = df_subset.sort_values(by='Date', ascending=False)
+
+                # Streamlit 앱 구성
+                #st.subheader(' {}의 금일 종가에 비해 60일 이후 종가 평균이 클 확률'.format(company_name))
+                    
+                st.markdown('#### - {}의 금일 종가에 비해 60일 이후 종가 평균이 클 확률'.format(company_name))
+
+                st.dataframe(df_subset)
+                
             with tab102:
                 st.markdown('''
                     <div style="text-align: center; padding: 10px; background-color: #E8F0FE; border-radius: 10px; color: black;">
@@ -487,6 +510,25 @@ def main():
 
                 # 전날 대비 등락율 텍스트 표시
                 st.markdown(f"<font color='{change_color}'>Change: {latest_change_pct:.2f}%</font>", unsafe_allow_html=True)
+                
+                df_subset = df3[['Date', 'company_name', 'Score']]
+
+                # company_name과 이름이 일치하는 데이터만 추출
+                company_name = "POSCO홀딩스"  # 원하는 회사 이름으로 변경
+                df_subset = df_subset[df_subset['company_name'] == company_name]
+
+                # 날짜(date) 컬럼을 날짜 형식으로 변환
+                df_subset['Date'] = pd.to_datetime(df_subset['Date'])
+
+                # 날짜(date) 컬럼을 기준으로 최신 순으로 정렬
+                df_subset = df_subset.sort_values(by='Date', ascending=False)
+
+                # Streamlit 앱 구성
+                #st.subheader(' {}의 금일 종가에 비해 60일 이후 종가 평균이 클 확률'.format(company_name))
+                    
+                st.markdown('#### - {}의 금일 종가에 비해 60일 이후 종가 평균이 클 확률'.format(company_name))
+
+                st.dataframe(df_subset)
             with tab102:
                 st.markdown('''
                     <div style="text-align: center; padding: 10px; background-color: #E8F0FE; border-radius: 10px; color: black;">
@@ -624,6 +666,25 @@ def main():
 
                 # 전날 대비 등락율 텍스트 표시
                 st.markdown(f"<font color='{change_color}'>Change: {latest_change_pct:.2f}%</font>", unsafe_allow_html=True)
+                
+                df_subset = df3[['Date', 'company_name', 'Score']]
+
+                # company_name과 이름이 일치하는 데이터만 추출
+                company_name = "셀트리온"  # 원하는 회사 이름으로 변경
+                df_subset = df_subset[df_subset['company_name'] == company_name]
+
+                # 날짜(date) 컬럼을 날짜 형식으로 변환
+                df_subset['Date'] = pd.to_datetime(df_subset['Date'])
+
+                # 날짜(date) 컬럼을 기준으로 최신 순으로 정렬
+                df_subset = df_subset.sort_values(by='Date', ascending=False)
+
+                # Streamlit 앱 구성
+                #st.subheader(' {}의 금일 종가에 비해 60일 이후 종가 평균이 클 확률'.format(company_name))
+                    
+                st.markdown('#### - {}의 금일 종가에 비해 60일 이후 종가 평균이 클 확률'.format(company_name))
+
+                st.dataframe(df_subset)
             with tab102:
                 st.markdown('''
                     <div style="text-align: center; padding: 10px; background-color: #E8F0FE; border-radius: 10px; color: black;">
@@ -658,7 +719,7 @@ def main():
                         <h3 style="font-size: 16px; font-weight: normal;">- 재무제표 데이터를 통해 해당 기업이 자산을 얼마나 효율적으로 사용하는지 안내합니다. </h3>
                     </div>
                 ''', unsafe_allow_html=True)
-                selected_stock = "삼성전자"  # Replace "삼성전자" with the default stock you want to display
+                selected_stock = "셀트리온"  # Replace "삼성전자" with the default stock you want to display
 
                 filtered_df = df1[df1['기업명'] == selected_stock]
                 if filtered_df.empty:
@@ -764,6 +825,25 @@ def main():
 
                     # 전날 대비 등락율 텍스트 표시
                 st.markdown(f"<font color='{change_color}'>Change: {latest_change_pct:.2f}%</font>", unsafe_allow_html=True)
+                
+                df_subset = df3[['Date', 'company_name', 'Score']]
+
+                # company_name과 이름이 일치하는 데이터만 추출
+                company_name = "삼성생명"  # 원하는 회사 이름으로 변경
+                df_subset = df_subset[df_subset['company_name'] == company_name]
+
+                # 날짜(date) 컬럼을 날짜 형식으로 변환
+                df_subset['Date'] = pd.to_datetime(df_subset['Date'])
+
+                # 날짜(date) 컬럼을 기준으로 최신 순으로 정렬
+                df_subset = df_subset.sort_values(by='Date', ascending=False)
+
+                # Streamlit 앱 구성
+                #st.subheader(' {}의 금일 종가에 비해 60일 이후 종가 평균이 클 확률'.format(company_name))
+                    
+                st.markdown('#### - {}의 금일 종가에 비해 60일 이후 종가 평균이 클 확률'.format(company_name))
+
+                st.dataframe(df_subset)
             with tab102:
                 st.markdown('''
                     <div style="text-align: center; padding: 10px; background-color: #E8F0FE; border-radius: 10px; color: black;">

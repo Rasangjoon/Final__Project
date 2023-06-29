@@ -61,8 +61,9 @@ def main():
             st.subheader(f'Fast STC(스토캐스틱) - {stock}')
             st.markdown('''
                         <div style="text-align: left; padding: 10px; background-color: #E8F0FE; border-radius: 10px; color: black;">
-                        <h3 style="font-size: 16px; font-weight: normal;">- "Fast STC란?  </h3>
-                        <h3 style="font-size: 14px; font-weight: normal;"> "일정기간 동안의 최고가와 최저가의 범위 중에서 현재 가격의 위치를 백분율로 나타내는 기술적 지표입니다.  </h3>
+                        <h3 style="font-size: 16px; font-weight: normal;">- Fast STC란?  </h3>
+                        <h3 style="font-size: 14px; font-weight: normal;"> fast_k는 일정기간(9일) 동안의 최고가와 최저가의 범위 중에서 현재 가격의 위치를 백분율로 나타내는 기술적 지표입니다.  </h3>
+                        <h3 style="font-size: 14px; font-weight: normal;"> fast_d는 fast_k의 이동평균(5일)을 나타낸 값입니다.</h3>
                         </div>
                         ''', unsafe_allow_html=True)            
             fig_fast_stc = go.Figure()
@@ -84,9 +85,10 @@ def main():
             st.subheader(f'MA(이동평균선) - {stock}')
             st.markdown('''
                         <div style="text-align: left; padding: 10px; background-color: #E8F0FE; border-radius: 10px; color: black;">
-                        <h3 style="font-size: 17px; font-weight: normal;">- "MA(Moving Average))란?  </h3>
-                        <h3 style="font-size: 14px; font-weight: normal;"> 가격, 지수 등의 수치의 변화를 관찰하고 분석하는데 있어 일정한 부분집합의 평균값 계산으로 인해</h3>
-                        <h3 style="font-size: 14px; font-weight: normal;">  값의 전반적인 변화 흐름(추세) 파악을 도와줍니다.  </h3>
+                        <h3 style="font-size: 17px; font-weight: normal;">- MA(Moving Average))란?  </h3>
+
+                        <h3 style="font-size: 14px; font-weight: normal;"> 최근(20일) 주가의 평균값을 나타내는 지표입니다.  </h3>
+                        <h3 style="font-size: 14px; font-weight: normal;"> 이동평균선과 현재 가격을 비교하여 추세의 변화를 파악 할 수 있습니다..</h3>
                         </div>
                         ''', unsafe_allow_html=True)
             fig_ma = go.Figure()
@@ -112,8 +114,10 @@ def main():
             st.markdown('''
                         <div style="text-align: left; padding: 10px; background-color: #E8F0FE; border-radius: 10px; color: black;">
                         <h3 style="font-size: 17px; font-weight: normal;">- Volume 이란?  </h3>
-                        <h3 style="font-size: 14px; font-weight: normal;"> 거래량을 의미합니다. </h3>
-                        <h3 style="font-size: 14px; font-weight: normal;">   </h3>
+                        <h3 style="font-size: 14px; font-weight: normal;"> 하루의 거래된 주식의 수를 나타냅니다. </h3>
+                        <h3 style="font-size: 14px; font-weight: normal;"> 거래량은 주식이 얼마나 활발하게 거래되는지 나타냅니다.  </h3>
+                        <h3 style="font-size: 14px; font-weight: normal;"> 주식에 대한 수급 강도를 보여줍니다.  </h3>
+                        <h3 style="font-size: 14px; font-weight: normal;"> 가격에 선행하는 지표로 여겨지기도 합니다. </h3>
                         </div>
                         ''', unsafe_allow_html=True)
             fig_volume = go.Figure()
@@ -133,8 +137,10 @@ def main():
             st.markdown('''
                         <div style="text-align: left; padding: 10px; background-color: #E8F0FE; border-radius: 10px; color: black;">
                         <h3 style="font-size: 17px; font-weight: normal;">- STD(Standard Deviation)란?  </h3>
-                        <h3 style="font-size: 14px; font-weight: normal;"> n일간 종가의 표준편차  </h3>
+                        <h3 style="font-size: 14px; font-weight: normal;"> 일정기간(20일) 종가의 표준편차  </h3>
                         <h3 style="font-size: 14px; font-weight: normal;"> 크게 변동하고 있는 종목들을 검색 할 수 있습니다. (주로 보조로만 사용) </h3>
+                        <h3 style="font-size: 14px; font-weight: normal;"> 해당 기간 가격의 변화폭 크기를 나타냅니다. </h3>
+
                         </div>
                         ''', unsafe_allow_html=True)
             fig_STD = go.Figure()
@@ -154,8 +160,10 @@ def main():
             st.markdown('''
                         <div style="text-align: left; padding: 10px; background-color: #E8F0FE; border-radius: 10px; color: black;">
                         <h3 style="font-size: 17px; font-weight: normal;">- Bolinger Band란?  </h3>
-                        <h3 style="font-size: 14px; font-weight: normal;"> Upper, Lower : 5일 이동평균에서 STD를 더하고 빼준 것   </h3>
+                        <h3 style="font-size: 14px; font-weight: normal;"> Upper, Lower : 종가의 이동평균(5일)에서 표준편차(20일)를 더하고 빼준 값.   </h3>
                         <h3 style="font-size: 14px; font-weight: normal;"> 종가(close)값과 비교하여 어느정도 위치에 있는지 알 수 있습니다.  </h3>
+                        <h3 style="font-size: 14px; font-weight: normal;"> 종가가 움직일만한 범위를 나타냅니다. 상한, 하한 사이를 종가가 벗어난 경우 과매수 혹은 과매도라고 판단할 수 있습니다. </h3>
+
                         </div>
                         ''', unsafe_allow_html=True)
             fig_bol = go.Figure()
@@ -179,10 +187,10 @@ def main():
             st.markdown('''
                         <div style="text-align: left; padding: 10px; background-color: #E8F0FE; border-radius: 10px; color: black;">
                         <h3 style="font-size: 17px; font-weight: normal;">- OBV(On Balance Volume)이란?  </h3>
-                        <h3 style="font-size: 14px; font-weight: normal;"> 가격 상승 시 거래량을 더해가고 하락시 빼가며 누적된 값(가격과 유사하게 움직임)  </h3>
-                        <h3 style="font-size: 14px; font-weight: normal;"> 거래량과 관련된 지표입니다. </h3>
-                        <h3 style="font-size: 14px; font-weight: normal;"> 상승하는 것을: 매집, 매집이 일어나면 특정 세력이 주식을 집중적으로 매입하는 것으로 간주, 주가 상승 </h3>
-                        <h3 style="font-size: 14px; font-weight: normal;"> 하락하는 것을 분산, 분산은 특정 세력이 주식을 매도하는것으로 해석, 주가 하락 </h3>
+                        <h3 style="font-size: 14px; font-weight: normal;"> 가격 상승 시 거래량을 더해가고 하락시 빼가며 누적된 값으로 가격과 유사하게 움직입니다. </h3>
+                        <h3 style="font-size: 14px; font-weight: normal;"> 가격이 상승하는 경우, OBV도 상승하고, 거래량이 클수록 크게 변동합니다.</h3>
+                        <h3 style="font-size: 14px; font-weight: normal;"> 상승하는 것을 매집이라고 하며, 매집은 주식이 집중적으로 매입 되는 것을 의미합니다. </h3>
+                        <h3 style="font-size: 14px; font-weight: normal;"> 하락하는 것을 분산이라고 하며, 분산은 주식이 집중적으로 매도 되는 것을 의미합니다. </h3>
                         </div>
                         ''', unsafe_allow_html=True)
             fig_OBV = go.Figure()
@@ -206,9 +214,8 @@ def main():
             st.markdown('''
                         <div style="text-align: left; padding: 10px; background-color: #E8F0FE; border-radius: 10px; color: black;">
                         <h3 style="font-size: 17px; font-weight: normal;">- CCI(Commodity Channel Index) 란?  </h3>
-                        <h3 style="font-size: 14px; font-weight: normal;"> 특정상품의 통계분석에 있어 계절적 특성이나 주기를 알려주는 유용한 지표입니다.  </h3>
-                        <h3 style="font-size: 14px; font-weight: normal;"> 주가의 길이를 결정하기보단 주기의 시작과 끝이 타당한지를 검토하는 기술적 지표입니다.  </h3>
-                        <h3 style="font-size: 14px; font-weight: normal;"> +값이면 상승세:매수,    -이면 하락세:매도  </h3>
+                        <h3 style="font-size: 14px; font-weight: normal;"> Typical Price(고가,저가,종가의 평균)의 이동평균(45일)에 대한 종가의 위치를 나타내는 지표입니다.  </h3>
+                        <h3 style="font-size: 14px; font-weight: normal;"> 100보다 크면 과매수, 100보다 작으면 과매도로 볼 수 있습니다. </h3>
                         </div>
                         ''', unsafe_allow_html=True)
             fig_CCI = go.Figure()
@@ -232,9 +239,11 @@ def main():
             st.markdown('''
                         <div style="text-align: left; padding: 10px; background-color: #E8F0FE; border-radius: 10px; color: black;">
                         <h3 style="font-size: 17px; font-weight: normal;">- RSI(Relative Strength Index) 란?  </h3>
-                        <h3 style="font-size: 14px; font-weight: normal;"> 일정 기간 동안 주가가 전일 가격에 비해 상승한 변화량과 하락한 변화량의 평균값을 구하여,  </h3>
-                        <h3 style="font-size: 14px; font-weight: normal;"> 상승한 변화량이 크면 과매수로, 하락한 변화량이 크면 과매도로 판단하는 방식.  </h3>
-                        <h3 style="font-size: 14px; font-weight: normal;"> n일 동안 전일 대비 가격 변화분 중 상승분의 비율  </h3>
+                        <h3 style="font-size: 14px; font-weight: normal;"> 현재 가격의 상승 압력과 하락 압력간에 상대적인 강도를 나타냅니다.  </h3>
+
+                        <h3 style="font-size: 14px; font-weight: normal;"> 일정 기간(6일) 동안 주가가 전일 가격에 비해 상승한 변화량과 하락한 변화량의 평균값을 구하여, 그 비율을 사용하여 계산됩니다.</h3>
+                        <h3 style="font-size: 14px; font-weight: normal;"> 상승한 변화량이 크면 과매수로, 하락한 변화량이 크면 과매도로 판단하는 방식으로,  </h3>
+                        <h3 style="font-size: 14px; font-weight: normal;"> 70보다 높으면 과매수, 30보다 낮으면 과매도로 판단할 수 있습니다.  </h3>
                         </div>
                         ''', unsafe_allow_html=True)
             fig_RSI = go.Figure()
@@ -252,13 +261,15 @@ def main():
             st.plotly_chart(fig_RSI)  
             
         if 'MFI' in selected_graphs:
-            st.subheader(f'Money Flow Index(상대강도지수) - {stock}')
+            st.subheader(f'Money Flow Index(자금흐름지표) - {stock}')
             st.markdown('''
                         <div style="text-align: left; padding: 10px; background-color: #E8F0FE; border-radius: 10px; color: black;">
                         <h3 style="font-size: 17px; font-weight: normal;">- MFI(Money Flow Index) 란?  </h3>
                         <h3 style="font-size: 14px; font-weight: normal;"> 매수와 매도의 상대강도를 측정하기 위해 사용되는 기술적 지표입니다.  </h3>
                         <h3 style="font-size: 14px; font-weight: normal;"> 주식의 가격 뿐만 아니라 거래량도 함께 사용합니다.  </h3>
-                        <h3 style="font-size: 14px; font-weight: normal;"> 하루 평균가격과 거래량을 곱한 RMF 중 양의 RMF 비율 입니다.  </h3>
+
+                        <h3 style="font-size: 14px; font-weight: normal;"> 일정 기간(14일) 동안 주가 변화분에 거래량을 곱한 RMF를 구한 후 양의 RMF와 음의 RMF의 비율로 계산됩니다. </h3>
+                        
                         </div>
                         ''', unsafe_allow_html=True)
             fig_MFI = go.Figure()
@@ -283,9 +294,10 @@ def main():
             st.markdown('''
                         <div style="text-align: left; padding: 10px; background-color: #E8F0FE; border-radius: 10px; color: black;">
                         <h3 style="font-size: 17px; font-weight: normal;">- ROC(Rate Of Change) 란?  </h3>
-                        <h3 style="font-size: 14px; font-weight: normal;"> 과거 일정시점의 가격과 현재가격을 비교하여 추세의 반전을 알려주는 중요한 지표입니다.  </h3>
-                        <h3 style="font-size: 14px; font-weight: normal;"> 시장특성을 분석하는 기법에 사용됩니다.  </h3>
-                        <h3 style="font-size: 14px; font-weight: normal;"> n일 전 가격 대비 상승률 </h3>
+                        <h3 style="font-size: 14px; font-weight: normal;"> 기준일(45일 전)의 주가에 비해 주가가 얼마나 변화하였는지를 의미합니다. </h3>
+                        <h3 style="font-size: 14px; font-weight: normal;"> 과거 일정시점의 가격과 현재가격을 비교하여 현재 추세를 알려주는 중요한 지표입니다.  </h3>
+                        <h3 style="font-size: 14px; font-weight: normal;"> 값이 0인 경우 기준일과 주가가 동일함을 의미합니다.  </h3>
+
                         </div>
                         ''', unsafe_allow_html=True)
 
@@ -309,10 +321,10 @@ def main():
         if 'DP' in selected_graphs:
             st.markdown('''
                         <div style="text-align: left; padding: 10px; background-color: #E8F0FE; border-radius: 10px; color: black;">
-                        <h3 style="font-size: 17px; font-weight: normal;">- DP(Disparity) 란?  </h3>
+                        <h3 style="font-size: 17px; font-weight: normal;">- Disparity(이격도) 란?  </h3>
                         <h3 style="font-size: 14px; font-weight: normal;"> 주가와 이동평균선 사이가 얼마나 떨어져있는지(괴리율)을 나타내는 지표입니다. </h3>
-                        <h3 style="font-size: 14px; font-weight: normal;"> 단기 투자시점을 포착하는 지표로 활용됩니다. </h3>
-                        <h3 style="font-size: 14px; font-weight: normal;"> 당일의 주가를 이동평균치로 나눠 계산합니다. </h3>
+                        <h3 style="font-size: 14px; font-weight: normal;"> 종가를 이동평균(20일)으로 나누고 100을 곱하여 계산된 값입니다.</h3>
+                        <h3 style="font-size: 14px; font-weight: normal;"> 값이 100인 경우 종가와 이동평균선 값이 일치합니다.</h3>
                         
                         </div>
                         ''', unsafe_allow_html=True)

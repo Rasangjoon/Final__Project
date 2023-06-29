@@ -357,6 +357,8 @@ def main():
                 'Count': [positive_count, negative_count],
                 'Ratio': [positive_ratio, negative_ratio]
             })
+            
+            st.dataframe(ratio_data)
 
 if __name__ == '__main__':
     main()
